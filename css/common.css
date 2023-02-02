@@ -22,3 +22,31 @@ button {
   padding: 8px 12px;
   cursor: pointer;
 }
+
+/* task-03*/
+.gallery {
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+@media screen and (min-width: 720px) {
+  .img {
+    max-width: 320px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .img {
+    max-width: 480px;
+  }
+}
