@@ -1,17 +1,21 @@
-const getCounter = counter => {
-  let counterValue = 0;
-  const container = document.querySelector(counter);
+let counterValue = 0;
+const writeValue = display => (display.textContent = counterValue);
+
+const addEvent = ({ dataAction, container }) => {
   const display = container.querySelector('#value');
-  const writeValue = counterValue => (display.textContent = counterValue);
-  const addEvent = ({ dataAction }) => {
-    const button = container.querySelector(`[data-action=${dataAction}]`);
-    button.addEventListener('click', () => {
-      counterValue += Number(button.textContent);
-      writeValue(counterValue);
-    });
-  };
-  addEvent({ dataAction: 'decrement' });
-  addEvent({ dataAction: 'increment' });
+  const button = container.querySelector(`[data-action=${dataAction}]`);
+
+  button.addEventListener('click', () => {
+    counterValue += Number(button.textContent);
+    writeValue(display);
+  });
+};
+
+const getCounter = counter => {
+  const container = document.querySelector(counter);
+
+  addEvent({ dataAction: 'decrement', container: container });
+  addEvent({ dataAction: 'increment', container: container });
 };
 
 getCounter('#counter');

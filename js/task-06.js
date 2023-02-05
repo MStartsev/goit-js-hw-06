@@ -1,23 +1,27 @@
-const correctAmount = ({ input }) => {
-  const inputEl = document.querySelector(input);
+const inputEl = document.querySelector('#validation-input');
+
+const correctAmount = inputEl => {
   const dataLength = Number(inputEl.dataset.length);
+  let classList = '';
 
-  inputEl.addEventListener('blur', () => {
-    const inputValue = inputEl.value.trim() || 0;
+  inputEl.addEventListener('blur', addCorrectClass);
+
+  function addCorrectClass() {
+    const inputValue = inputEl.value.replace(/\s/g, '') || '';
+
     inputEl.value = inputValue;
-    const inputValueLength = inputValue.length;
 
-    if (inputValueLength >= dataLength) {
-      inputEl.classList.contains('invalid')
-        ? inputEl.classList.replace('invalid', 'valid')
-        : inputEl.classList.add('valid');
-      return;
+    const correctLength = inputValue.length === dataLength;
+    const correctClass = correctLength ? 'valid' : 'invalid';
+
+    if (!(classList === correctClass)) {
+      inputEl.classList.add(correctClass);
+
+      if (classList) inputEl.classList.remove(classList);
     }
 
-    inputEl.classList.contains('valid')
-      ? inputEl.classList.replace('valid', 'invalid')
-      : inputEl.classList.add('invalid');
-  });
+    classList = correctClass;
+  }
 };
 
-correctAmount({ input: '#validation-input' });
+correctAmount(inputEl);

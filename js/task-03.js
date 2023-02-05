@@ -13,13 +13,10 @@ const images = [
   },
 ];
 
-const createGallery = images => {
-  let gallery = '';
-  [...images].map(({ url, alt }) => {
-    gallery += `<li><img class='img' src=${url} alt='${alt}'>`;
-  });
-  return gallery;
-};
+const createGallery = images =>
+  images
+    .map(({ url, alt }) => `<li><img class='img' src=${url} alt='${alt}'>`)
+    .join('');
 
 document
   .querySelector('.gallery')

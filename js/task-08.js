@@ -1,6 +1,6 @@
-const examForm = ({ form }) => {
-  const formEl = document.querySelector(form);
+const formEl = document.querySelector('.login-form');
 
+const examForm = formEl => {
   formEl.addEventListener('submit', handleSubmit);
 
   function handleSubmit(event) {
@@ -9,7 +9,7 @@ const examForm = ({ form }) => {
       elements: { email, password },
     } = event.currentTarget;
 
-    if (email.value === '' || password.value === '') {
+    if (!(email.value.trim() || password.value)) {
       return alert('Please fill in all the fields!');
     }
 
@@ -18,4 +18,4 @@ const examForm = ({ form }) => {
   }
 };
 
-examForm({ form: '.login-form' });
+examForm(formEl);
